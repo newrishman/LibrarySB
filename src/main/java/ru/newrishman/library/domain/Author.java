@@ -1,5 +1,6 @@
 package ru.newrishman.library.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import javax.persistence.*;
@@ -41,11 +42,6 @@ public class Author {
         this.author = author;
     }
 
-    public Author(long id, String author) {
-        this.id = id;
-        this.author = author;
-    }
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -64,6 +60,7 @@ public class Author {
         return result;
     }
 
+    @JsonIgnore
     @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JoinTable(
             name = "author_book", joinColumns = @JoinColumn(name = "id_author"), inverseJoinColumns =

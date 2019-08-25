@@ -1,5 +1,6 @@
 package ru.newrishman.library.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import javax.persistence.*;
@@ -41,11 +42,6 @@ public class Book {
         this.book = book;
     }
 
-    public Book(long id, String book) {
-        this.id = id;
-        this.book = book;
-    }
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -64,6 +60,7 @@ public class Book {
         return result;
     }
 
+    @JsonIgnore
     @ManyToMany(mappedBy = "books")
     private Set<Author> authors;
 

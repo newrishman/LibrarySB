@@ -71,6 +71,8 @@ public class LibraryController {
         authors.add(author);
         Set<Book> books = new HashSet<>();
         books.add(book);
+        author.setBooks(books);
+        book.setAuthors(authors);
 
         bookService.addBook(book);
         authorService.addAuthor(author);
