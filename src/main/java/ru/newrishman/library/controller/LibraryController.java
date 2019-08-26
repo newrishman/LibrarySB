@@ -37,7 +37,8 @@ public class LibraryController {
 
     @GetMapping("/authors/")
     public List<Author> getAllAuthors() {
-        return authorService.getAllAuthors();
+        return authorService.findAuthorByBook("Как терпеть Ришата");
+            //    getAllAuthors();
     }
 
     @GetMapping("/book/{id}")
@@ -62,15 +63,15 @@ public class LibraryController {
 
     @PostMapping
     public Long add(@RequestBody AuthorBook authorBook){
-        Book book = new Book();
-        book.setBook(authorBook.getBook());
-        Author author= new Author();
-        author.setAuthor(authorBook.getAuthor());
 
-        Set<Author> authors = new HashSet<>();
-        authors.add(author);
+        Book book = new Book(authorBook.getBook());
         Set<Book> books = new HashSet<>();
         books.add(book);
+
+        Author author= new Author(authorBook.getAuthor());
+        Set<Author> authors = new HashSet<>();
+        authors.add(author);
+
         author.setBooks(books);
         book.setAuthors(authors);
 
@@ -81,10 +82,5 @@ public class LibraryController {
   /*  @PutMapping
     public void update(@RequestBody Book book) {
         bookService.updateBook(book);
-    }
-
-    @PostMapping
-    public Long add(@RequestBody Book book) {
-        return bookService.addBook(book).getId();
     }*/
 }
