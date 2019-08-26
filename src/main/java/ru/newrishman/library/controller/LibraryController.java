@@ -8,7 +8,6 @@ import ru.newrishman.library.domain.Book;
 import ru.newrishman.library.service.AuthorService;
 import ru.newrishman.library.service.BookService;
 
-
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -32,14 +31,16 @@ public class LibraryController {
 
     @GetMapping("/books/")
     public List<Book> getAllBooks() {
-        return bookService.findBookByAuthor("Малик");
-                //getAllBooks();
+        return bookService.getAllBooks();
+        //findBookByName("Как терпеть Ришата");
+        //findBookByAuthor("Малик");
     }
 
     @GetMapping("/authors/")
     public List<Author> getAllAuthors() {
-        return authorService.findAuthorByBook("Как терпеть Ришата");
-            //getAllAuthors();
+        return authorService.getAllAuthors();
+        //findAuthorByName("Малик");
+        //findAuthorByBook("Как терпеть Ришата");
     }
 
     @GetMapping("/book/{id}")
@@ -63,13 +64,13 @@ public class LibraryController {
     }
 
     @PostMapping
-    public Long add(@RequestBody AuthorBook authorBook){
+    public Long add(@RequestBody AuthorBook authorBook) {
 
         Book book = new Book(authorBook.getBook());
         Set<Book> books = new HashSet<>();
         books.add(book);
 
-        Author author= new Author(authorBook.getAuthor());
+        Author author = new Author(authorBook.getAuthor());
         Set<Author> authors = new HashSet<>();
         authors.add(author);
 
@@ -80,8 +81,4 @@ public class LibraryController {
         authorService.addAuthor(author);
         return 1L;
     }
-  /*  @PutMapping
-    public void update(@RequestBody Book book) {
-        bookService.updateBook(book);
-    }*/
 }
