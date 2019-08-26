@@ -64,7 +64,7 @@ public class LibraryController {
     }
 
     @PostMapping
-    public Long add(@RequestBody AuthorBook authorBook) {
+    public void add(@RequestBody AuthorBook authorBook) {
 
         Book book = new Book(authorBook.getBook());
         Set<Book> books = new HashSet<>();
@@ -79,6 +79,5 @@ public class LibraryController {
 
         bookService.addBook(book);
         authorService.addAuthor(author);
-        return 1L;
     }
 }
