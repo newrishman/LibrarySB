@@ -1,6 +1,7 @@
 package ru.newrishman.library.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import ru.newrishman.library.domain.Author;
 import ru.newrishman.library.domain.AuthorBook;
@@ -13,7 +14,7 @@ import java.util.List;
 import java.util.Set;
 
 
-@RestController
+@Controller
 @RequestMapping("/library")
 public class LibraryController {
     private AuthorService authorService;
@@ -28,6 +29,9 @@ public class LibraryController {
     public void setBookService(BookService bookService) {
         this.bookService = bookService;
     }
+
+
+    //  @RequestMapping(value = { "/", "/index" }, method = RequestMethod.GET)
 
     @GetMapping("/books/")
     public List<Book> getAllBooks() {
@@ -63,16 +67,16 @@ public class LibraryController {
 
         Author author =
                 authorService.getAuthorById(1); // как будто автор уже есть
-              //    new Author(authorBook.getAuthor());  когда новый автор
+        //    new Author(authorBook.getAuthor());  когда новый автор
 
         author.getBooks().add(book); // в его Set кидаем новую книгу
 
 
-       // Set<Author> authors = new HashSet<>(); когда новый автор
-       // authors.add(author);  когда новый автор
+        // Set<Author> authors = new HashSet<>(); когда новый автор
+        // authors.add(author);  когда новый автор
 
         //author.setBooks(books); когда новый автор
-       // book.setAuthors(authors); когда новый автор
+        // book.setAuthors(authors); когда новый автор
 
         bookService.addBook(book);        // сохраняем новую книгу
         authorService.addAuthor(author);  // перезаписываем автора с сылками на новые книги
