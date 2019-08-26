@@ -60,15 +60,22 @@ public class LibraryController {
         Set<Book> books = new HashSet<>();
         books.add(book);
 
-        Author author = new Author(authorBook.getAuthor());
-        Set<Author> authors = new HashSet<>();
-        authors.add(author);
 
-        author.setBooks(books);
-        book.setAuthors(authors);
+        Author author =
+                authorService.getAuthorById(1); // как будто автор уже есть
+              //    new Author(authorBook.getAuthor());  когда новый автор
 
-        bookService.addBook(book);
-        authorService.addAuthor(author);
+        author.getBooks().add(book); // в его Set кидаем новую книгу
+
+
+       // Set<Author> authors = new HashSet<>(); когда новый автор
+       // authors.add(author);  когда новый автор
+
+        //author.setBooks(books); когда новый автор
+       // book.setAuthors(authors); когда новый автор
+
+        bookService.addBook(book);        // сохраняем новую книгу
+        authorService.addAuthor(author);  // перезаписываем автора с сылками на новые книги
     }
 
     @DeleteMapping("/books/{id}")
