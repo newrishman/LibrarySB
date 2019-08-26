@@ -32,13 +32,14 @@ public class LibraryController {
 
     @GetMapping("/books/")
     public List<Book> getAllBooks() {
-        return bookService.getAllBooks();
+        return bookService.findBookByAuthor("Малик");
+                //getAllBooks();
     }
 
     @GetMapping("/authors/")
     public List<Author> getAllAuthors() {
         return authorService.findAuthorByBook("Как терпеть Ришата");
-            //    getAllAuthors();
+            //getAllAuthors();
     }
 
     @GetMapping("/book/{id}")
