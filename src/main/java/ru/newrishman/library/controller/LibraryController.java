@@ -53,16 +53,6 @@ public class LibraryController {
         return authorService.getAuthorById(id);
     }
 
-    @DeleteMapping("/books/{id}")
-    public void deleteBook(@PathVariable long id) {
-        bookService.deleteBook(id);
-    }
-
-    @DeleteMapping("/authors/{id}")
-    public void deleteAuthor(@PathVariable long id) {
-        authorService.deleteAuthor(id);
-    }
-
     @PostMapping
     public void add(@RequestBody AuthorBook authorBook) {
 
@@ -80,4 +70,16 @@ public class LibraryController {
         bookService.addBook(book);
         authorService.addAuthor(author);
     }
+
+    @DeleteMapping("/books/{id}")
+    public void deleteBook(@PathVariable long id) {
+        bookService.deleteBook(id);
+    }
+
+    @DeleteMapping("/authors/{id}")
+    public void deleteAuthor(@PathVariable long id) {
+        authorService.deleteAuthor(id);
+    }
+
+
 }

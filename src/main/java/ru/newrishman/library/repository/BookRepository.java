@@ -7,5 +7,6 @@ import java.util.List;
 
 public interface BookRepository extends JpaRepository<Book, Long> {
     List<Book> findByAuthors_authorLikeIgnoreCase(String author);
+
     Book findByBookIgnoreCase(String Book);
 }
