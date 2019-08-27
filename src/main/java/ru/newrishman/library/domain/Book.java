@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import javax.persistence.*;
+import java.util.Objects;
 import java.util.Set;
 
 @Entity
@@ -17,7 +18,14 @@ public class Book {
     private long id;
 
     @Column(name = "book")
-    private String book;
+    private String title;
+
+    public Book() {
+    }
+
+    public Book(String title) {
+        this.title = title;
+    }
 
     public long getId() {
         return id;
@@ -27,37 +35,27 @@ public class Book {
         this.id = id;
     }
 
-    public String getBook() {
-        return book;
+    public String getTitle() {
+        return title;
     }
 
-    public void setBook(String book) {
-        this.book = book;
-    }
-
-    public Book() {
-    }
-
-    public Book(String book) {
-        this.book = book;
+    public void setTitle(String title) {
+        this.title = title;
     }
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-
-        Book book1 = (Book) o;
-
-        if (id != book1.id) return false;
-        return book != null ? book.equals(book1.book) : book1.book == null;
+        Book book = (Book) o;
+        return id == book.id &&
+                Objects.equals(title, book.title) &&
+                Objects.equals(authors, book.authors);
     }
 
     @Override
     public int hashCode() {
-        int result = (int) (id ^ (id >>> 32));
-        result = 31 * result + (book != null ? book.hashCode() : 0);
-        return result;
+        return Objects.hash(id, title, authors);
     }
 
     @JsonIgnore
@@ -72,11 +70,5 @@ public class Book {
         this.authors = authors;
     }
 
-    @Override
-    public String toString() {
-        return "Book{" +
-                "id=" + id +
-                ", book='" + book + '\'' +
-                '}';
-    }
+
 }

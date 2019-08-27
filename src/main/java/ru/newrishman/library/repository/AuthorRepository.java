@@ -6,7 +6,7 @@ import ru.newrishman.library.domain.Author;
 import java.util.List;
 
 public interface AuthorRepository extends JpaRepository<Author, Long> {
-    List<Author> findByBooks_bookLikeIgnoreCase(String book);
+  //  List<Author> findByBooks_bookLikeIgnoreCase(String book);
 
-    Author findByAuthorIgnoreCase(String Author);
+   // Author findByAuthorIgnoreCase(String Author);
 }

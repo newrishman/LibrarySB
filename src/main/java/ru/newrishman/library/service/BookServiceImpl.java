@@ -26,7 +26,7 @@ public class BookServiceImpl implements BookService {
     @Override
     public void updateBook(Book book) {
         Book update = bookRepository.getOne(book.getId());
-        update.setBook(book.getBook());
+        update.setTitle(book.getTitle());
         bookRepository.save(update);
     }
 
@@ -45,7 +45,7 @@ public class BookServiceImpl implements BookService {
         return bookRepository.findAll();
     }
 
-    @Override
+   /* @Override
     public List<Book> findBookByAuthor(String author) {
         return bookRepository.findByAuthors_authorLikeIgnoreCase(author);
     }
@@ -53,5 +53,5 @@ public class BookServiceImpl implements BookService {
     @Override
     public Book findBookByName(String book) {
         return bookRepository.findByBookIgnoreCase(book);
-    }
+    }*/
 }
