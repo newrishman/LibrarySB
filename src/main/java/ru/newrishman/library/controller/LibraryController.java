@@ -31,7 +31,7 @@ public class LibraryController {
     }
 
 
-    @RequestMapping(value = "books", method = RequestMethod.GET)
+   @RequestMapping(value = "books", method = RequestMethod.GET)
     public String listBooks(Model model) {
         model.addAttribute("book", new Book());
         model.addAttribute("listBooks", this.bookService.getAllBooks());
@@ -72,27 +72,30 @@ public class LibraryController {
         return "bookdata";
     }
 
-/*    @GetMapping("/books/")
-    public void getAllBooks() {
-        bookService.getAllBooks();
-        //findBookByName("Как терпеть Ришата");
+/*   @GetMapping("/books/")
+    public Book getAllBooks() {
+       return bookService.
+                //getAllBooks();
+        findBookByTitle("Как терпеть Ришата");
         //findBookByAuthor("Малик");
     }
 
 
     @GetMapping("/authors/")
     public List<Author> getAllAuthors() {
-        return authorService.getAllAuthors();
+        return authorService.
+                //getAllAuthors();
         //findAuthorByName("Малик");
-        //findAuthorByBook("Как терпеть Ришата");
-    }
+        findAuthorByBook("Как терпеть Ришата");
+    }*/
 
+/*
     @GetMapping("/book/{id}")
     public Book getBook(@PathVariable long id) {
         return bookService.getBookById(id);
     }
 
-    @GetMapping("/author/{id}")
+  @GetMapping("/author/{id}")
     public Author getAuthor(@PathVariable long id) {
         return authorService.getAuthorById(id);
     }
