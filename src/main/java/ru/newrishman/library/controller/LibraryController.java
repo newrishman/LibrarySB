@@ -15,7 +15,7 @@ import java.util.Set;
 
 
 @Controller
-@RequestMapping("/library")
+//@RequestMapping("/library")
 public class LibraryController {
     private AuthorService authorService;
     private BookService bookService;
@@ -33,11 +33,13 @@ public class LibraryController {
 
     //  @RequestMapping(value = { "/", "/index" }, method = RequestMethod.GET)
 
-    @GetMapping("/books/")
-    public List<Book> getAllBooks() {
-        return bookService.getAllBooks();
+    //@GetMapping("/books/")
+    @RequestMapping(value = {"/books" }, method = RequestMethod.GET)
+    public String getAllBooks() {
+         bookService.getAllBooks();
         //findBookByName("Как терпеть Ришата");
         //findBookByAuthor("Малик");
+        return ("books");
     }
 
     @GetMapping("/authors/")
