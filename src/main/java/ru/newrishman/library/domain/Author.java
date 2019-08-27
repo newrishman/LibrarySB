@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import javax.persistence.*;
+import java.util.Objects;
 import java.util.Set;
 
 @Entity
@@ -17,7 +18,14 @@ public class Author {
     private long id;
 
     @Column(name = "author")
-    private String author;
+    private String name;
+
+    public Author() {
+    }
+
+    public Author(String name) {
+        this.name = name;
+    }
 
     public long getId() {
         return id;
@@ -27,37 +35,26 @@ public class Author {
         this.id = id;
     }
 
-    public String getAuthor() {
-        return author;
+    public String getName() {
+        return name;
     }
 
-    public void setAuthor(String author) {
-        this.author = author;
-    }
-
-    public Author() {
-    }
-
-    public Author(String author) {
-        this.author = author;
+    public void setName(String name) {
+        this.name = name;
     }
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-
-        Author author1 = (Author) o;
-
-        if (id != author1.id) return false;
-        return author != null ? author.equals(author1.author) : author1.author == null;
+        Author author = (Author) o;
+        return id == author.id &&
+                Objects.equals(name, author.name);
     }
 
     @Override
     public int hashCode() {
-        int result = (int) (id ^ (id >>> 32));
-        result = 31 * result + (author != null ? author.hashCode() : 0);
-        return result;
+        return Objects.hash(id, name);
     }
 
     @JsonIgnore
@@ -80,7 +77,7 @@ public class Author {
     public String toString() {
         return "Author{" +
                 "id=" + id +
-                ", author='" + author + '\'' +
+                ", author='" + name + '\'' +
                 '}';
     }
 }

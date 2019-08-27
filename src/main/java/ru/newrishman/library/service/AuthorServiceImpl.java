@@ -26,7 +26,7 @@ public class AuthorServiceImpl implements AuthorService {
     @Override
     public void updateAuthor(Author author) {
         Author update = authorRepository.getOne(author.getId());
-        update.setAuthor(author.getAuthor());
+        update.setName(author.getName());
         authorRepository.save(update);
     }
 
@@ -53,6 +53,6 @@ public class AuthorServiceImpl implements AuthorService {
 
     @Override
     public Author findAuthorByName(String author) {
-        return authorRepository.findByAuthorIgnoreCase(author);
+        return authorRepository.findByNameIgnoreCase(author);
     }
 }

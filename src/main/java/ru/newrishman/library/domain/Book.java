@@ -49,13 +49,12 @@ public class Book {
         if (o == null || getClass() != o.getClass()) return false;
         Book book = (Book) o;
         return id == book.id &&
-                Objects.equals(title, book.title) &&
-                Objects.equals(authors, book.authors);
+                Objects.equals(title, book.title);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, title, authors);
+        return Objects.hash(id, title);
     }
 
     @JsonIgnore

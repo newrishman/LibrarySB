@@ -12,7 +12,7 @@ import java.util.List;
 public interface AuthorRepository extends JpaRepository<Author, Long> {
     List<Author> findByBooks_titleLikeIgnoreCase(String book);
 
-    Author findByAuthorIgnoreCase(String Author);
+    Author findByNameIgnoreCase(String Author);
 
     @Modifying
     @Transactional

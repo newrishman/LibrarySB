@@ -10,7 +10,7 @@ import ru.newrishman.library.domain.Book;
 import java.util.List;
 
 public interface BookRepository extends JpaRepository<Book, Long> {
-    List<Book> findByAuthors_authorLikeIgnoreCase(String author);
+    List<Book> findByAuthors_nameLikeIgnoreCase(String author);
 
     Book findByTitleIgnoreCase(String title);
 
