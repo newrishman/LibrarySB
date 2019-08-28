@@ -29,7 +29,7 @@ public class LibraryController {
     }
 
     @RequestMapping("/")
-    public String home(){
+    public String home() {
         return "index";
     }
 
@@ -45,6 +45,15 @@ public class LibraryController {
         model.addAttribute("author", new Author());
         model.addAttribute("listAuthors", authorService.getAllAuthors());
         return "authors";
+    }
+
+    @RequestMapping(value = "books/{id}", method = RequestMethod.GET)
+    public String listBooksByAuthor(@PathVariable("id") long id, Model model) {
+        Author author = authorService.getAuthorById(id);
+
+        model.addAttribute("book", new Book());
+        model.addAttribute("listBooks", bookService.findBookByAuthor(author.getName()));
+        return "books";
     }
 
     @RequestMapping(value = "/books/add", method = RequestMethod.POST)

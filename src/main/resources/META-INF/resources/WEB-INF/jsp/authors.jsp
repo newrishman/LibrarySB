@@ -63,6 +63,7 @@
             <th width="160">Автор</th>
             <th width="60">Изменить</th>
             <th width="60">Удалить</th>
+            <th width="120">Просмотреть книги</th>
         </tr>
         <c:forEach items="${listAuthors}" var="author">
             <tr>
@@ -70,6 +71,7 @@
                 <td>${author.name}</td>
                 <td><a href="<c:url value='/authors/edit/${author.id}'/>">Изменить</a></td>
                 <td><a href="<c:url value='/authors/delete/${author.id}'/>">Удалить</a></td>
+                <td><a href="<c:url value='/books/${author.id}'/>">Push me, and then just touch me </a></td>
             </tr>
         </c:forEach>
     </table>
