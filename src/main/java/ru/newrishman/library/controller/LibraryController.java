@@ -28,6 +28,10 @@ public class LibraryController {
         this.bookService = bookService;
     }
 
+    @RequestMapping("/")
+    public String home(){
+        return "index";
+    }
 
     @RequestMapping(value = "books", method = RequestMethod.GET)
     public String listBooks(Model model) {
