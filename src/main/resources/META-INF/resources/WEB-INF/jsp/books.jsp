@@ -50,35 +50,34 @@
     </style>
 </head>
 <body>
-<a href="books1.jsp">Back to main menu</a>
+<a href="books1.jsp">Вернуться в главное меню</a>
 
 <br/>
 <br/>
 
-<h1>Book List</h1>
+<h1>Список книг</h1>
 
 <c:if test="${!empty listBooks}">
     <table class="tg">
         <tr>
             <th width="80">ID</th>
-            <th width="120">Book</th>
-            <th width="60">Edit</th>
-            <th width="60">Delete</th>
+            <th width="160">Книга</th>
+            <th width="60">Изменить</th>
+            <th width="60">Удалить</th>
         </tr>
         <c:forEach items="${listBooks}" var="book">
             <tr>
                 <td>${book.id}</td>
                 <td>${book.title}</td>
-              <%--  <td><a href="/bookdata/${book.id}" target="_blank">${book.book}</a></td>--%>
-                <td><a href="<c:url value='/edit/${book.id}'/>">Edit</a></td>
-                <td><a href="<c:url value='/remove/${book.id}'/>">Delete</a></td>
+                <td><a href="<c:url value='/books/edit/${book.id}'/>">Изменить</a></td>
+                <td><a href="<c:url value='/books/delete/${book.id}'/>">Удалить</a></td>
             </tr>
         </c:forEach>
     </table>
 </c:if>
 
 
-<h1>Add a Book</h1>
+<h1>Добавить книгу</h1>
 
 <c:url var="addBook" value="/books/add"/>
 
@@ -101,7 +100,7 @@
         <tr>
             <td>
                 <form:label path="title">
-                    <spring:message text="Title"/>
+                    <spring:message text="Название"/>
                 </form:label>
             </td>
             <td>
@@ -114,11 +113,11 @@
             <td colspan="2">
                 <c:if test="${!empty book.title}">
                     <input type="submit"
-                           value="<spring:message text="Edit Book"/>"/>
+                           value="<spring:message text="Изменить книгу"/>"/>
                 </c:if>
                 <c:if test="${empty book.title}">
                     <input type="submit"
-                           value="<spring:message text="Add Book"/>"/>
+                           value="<spring:message text="Добавить книгу"/>"/>
                 </c:if>
             </td>
         </tr>
