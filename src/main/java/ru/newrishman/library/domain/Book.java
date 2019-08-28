@@ -20,6 +20,15 @@ public class Book {
     @Column(name = "book")
     private String title;
 
+    @Lob
+    @Column(name="Book_File")
+    private byte[] bytes;
+
+    public Book(String title, byte[] bytes) {
+        this.title = title;
+        this.bytes = bytes;
+    }
+
     public Book() {
     }
 

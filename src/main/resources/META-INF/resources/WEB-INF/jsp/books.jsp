@@ -67,6 +67,7 @@
             <th width="160">Книга</th>
             <th width="60">Изменить</th>
             <th width="60">Удалить</th>
+            <th width="120">Просмотреть автора</th>
         </tr>
         <c:forEach items="${listBooks}" var="book">
             <tr>
@@ -74,6 +75,7 @@
                 <td>${book.title}</td>
                 <td><a href="<c:url value='/books/edit/${book.id}'/>">Изменить</a></td>
                 <td><a href="<c:url value='/books/delete/${book.id}'/>">Удалить</a></td>
+                <td><a href="<c:url value='/authors/${book.id}'/>"> Поиск </a></td>
             </tr>
         </c:forEach>
     </table>
@@ -84,7 +86,6 @@
 
 <%--@elvariable id="book" type="ru.newrishman.library.domain.Book"--%>
 <form:form action="${addBook}" modelAttribute="book">
-
 
 
     <table>
@@ -122,10 +123,11 @@
 </form:form>
 
 
-<h2>Сохранить книгу</h2>
-<p><input name="file" id="fileToUpload" type="file"/></p>
-<p><input type="submit" value="Сохранить"></p>
-
-
+<form method="POST" action="books" enctype="multipart/form-data">
+    <h2>Сохранить книгу</h2>
+    Автор: <input type="text" name="name"><br/>
+    Книга: <input type="file" name="file"><br/> <br/>
+    <input type="submit" value="Сохранить">
+</form>
 </body>
 </html>

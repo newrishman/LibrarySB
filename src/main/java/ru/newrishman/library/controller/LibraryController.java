@@ -3,14 +3,16 @@ package ru.newrishman.library.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 import ru.newrishman.library.domain.Author;
 import ru.newrishman.library.domain.Book;
 import ru.newrishman.library.service.AuthorService;
 import ru.newrishman.library.service.BookService;
+
+import java.io.IOException;
+import java.util.HashSet;
+import java.util.Set;
 
 
 @Controller
@@ -56,6 +58,15 @@ public class LibraryController {
         return "books";
     }
 
+    @RequestMapping(value = "authors/{id}", method = RequestMethod.GET)
+    public String listAuthorsByBook(@PathVariable("id") long id, Model model) {
+        Book book = bookService.getBookById(id);
+
+        model.addAttribute("author", new Author());
+        model.addAttribute("listAuthors", authorService.findAuthorByBook(book.getTitle()));
+        return "authors";
+    }
+
     @RequestMapping(value = "/books/add", method = RequestMethod.POST)
     public String addBook(@ModelAttribute("book") Book book) {
         if (book.getId() == 0) {
@@ -63,6 +74,35 @@ public class LibraryController {
         } else {
             bookService.updateBook(book);
         }
+        return "redirect:/books";
+    }
+
+    @RequestMapping(value = "/books", method = RequestMethod.POST)
+    public String saveBook(@RequestParam("name") String authorName,
+                           @RequestParam("file") MultipartFile file) throws IOException {
+        byte[] bytes = file.getBytes();
+
+        Book book = new Book(file.getOriginalFilename(), bytes);
+        Set<Book> books = new HashSet<>();
+        books.add(book);
+
+        Author author;
+        Author search = authorService.findAuthorByName(authorName);
+        if (search == null) {
+            author = new Author(authorName);
+
+            Set<Author> authors = new HashSet<>();
+            authors.add(author);
+
+            author.setBooks(books);
+            book.setAuthors(authors);
+        } else {
+            author = search;
+            author.getBooks().add(book);
+        }
+        bookService.addBook(book);
+        authorService.addAuthor(author);
+
         return "redirect:/books";
     }
 
