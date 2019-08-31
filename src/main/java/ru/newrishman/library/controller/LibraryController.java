@@ -80,15 +80,25 @@ public class LibraryController {
     @RequestMapping(value = "/books", method = RequestMethod.POST)
     public String saveBook(@RequestParam("name") String authorName,
                            @RequestParam("file") MultipartFile file) throws IOException {
-        byte[] bytes = file.getBytes();
 
-        Book book = new Book(file.getOriginalFilename(), bytes);
         Set<Book> books = new HashSet<>();
-        books.add(book);
+        byte[] bytes = file.getBytes();
+        String bookTitle = file.getOriginalFilename();
 
+        //проверяем наличие книги в БД
+        Book book;
+        Book searchB = bookService.findBookByTitle(bookTitle);
+        if (searchB == null) {
+            book = new Book(bookTitle, bytes);
+            books.add(book);
+        } else {
+            book = searchB;
+            books.add(book);
+        }
+        //проверяем наличие автора в БД
         Author author;
-        Author search = authorService.findAuthorByName(authorName);
-        if (search == null) {
+        Author searchA = authorService.findAuthorByName(authorName);
+        if (searchA == null) {
             author = new Author(authorName);
 
             Set<Author> authors = new HashSet<>();
@@ -97,9 +107,10 @@ public class LibraryController {
             author.setBooks(books);
             book.setAuthors(authors);
         } else {
-            author = search;
+            author = searchA;
             author.getBooks().add(book);
         }
+
         bookService.addBook(book);
         authorService.addAuthor(author);
 
@@ -109,7 +120,9 @@ public class LibraryController {
     @RequestMapping(value = "/authors/add", method = RequestMethod.POST)
     public String addAuthor(@ModelAttribute("author") Author author) {
         if (author.getId() == 0) {
-            authorService.addAuthor(author);
+            if (authorService.findAuthorByName(author.getName()) == null) {
+                authorService.addAuthor(author);
+            }
         } else {
             authorService.updateAuthor(author);
         }
@@ -141,70 +154,4 @@ public class LibraryController {
         model.addAttribute("listAuthors", authorService.getAllAuthors());
         return "authors";
     }
-
-/*   @GetMapping("/books/")
-    public Book getAllBooks() {
-       return bookService.
-                //getAllBooks();
-        findBookByTitle("Как терпеть Ришата");
-        //findBookByAuthor("Малик");
-    }
-
- <%--  <td><a href="/bookdata/${book.id}" target="_blank">${book.book}</a></td>--%>
-
-    @GetMapping("/authors/")
-    public List<Author> getAllAuthors() {
-        return authorService.
-                //getAllAuthors();
-        //findAuthorByName("Малик");
-        findAuthorByBook("Как терпеть Ришата");
-    }*/
-
-/*
-    @GetMapping("/book/{id}")
-    public Book getBook(@PathVariable long id) {
-        return bookService.getBookById(id);
-    }
-
-  @GetMapping("/author/{id}")
-    public Author getAuthor(@PathVariable long id) {
-        return authorService.getAuthorById(id);
-    }
-
-    @PostMapping
-    public void add(@RequestBody AuthorBook authorBook) {
-
-        Book book = new Book(authorBook.getBook());
-        Set<Book> books = new HashSet<>();
-        books.add(book);
-
-
-        Author author =
-                authorService.getAuthorById(1); // как будто автор уже есть
-        //    new Author(authorBook.getAuthor());  когда новый автор
-
-        author.getBooks().add(book); // в его Set кидаем новую книгу
-
-
-        // Set<Author> authors = new HashSet<>(); когда новый автор
-        // authors.add(author);  когда новый автор
-
-        //author.setBooks(books); когда новый автор
-        // book.setAuthors(authors); когда новый автор
-
-        bookService.addBook(book);        // сохраняем новую книгу
-        authorService.addAuthor(author);  // перезаписываем автора с сылками на новые книги
-    }
-
-    @DeleteMapping("/books/{id}")
-    public void deleteBook(@PathVariable long id) {
-        bookService.deleteBook(id);
-    }
-
-    @DeleteMapping("/authors/{id}")
-    public void deleteAuthor(@PathVariable long id) {
-        authorService.deleteAuthor(id);
-    }*/
-
-
 }
