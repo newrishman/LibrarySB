@@ -79,17 +79,16 @@ public class LibraryController {
 
     @RequestMapping(value = "/books", method = RequestMethod.POST)
     public String saveBook(@RequestParam("name") String authorName,
+                           @RequestParam("title") String title,
                            @RequestParam("file") MultipartFile file) throws IOException {
 
         Set<Book> books = new HashSet<>();
-        byte[] bytes = file.getBytes();
-        String bookTitle = file.getOriginalFilename();
 
         //проверяем наличие книги в БД
         Book book;
-        Book searchB = bookService.findBookByTitle(bookTitle);
+        Book searchB = bookService.findBookByTitle(title);
         if (searchB == null) {
-            book = new Book(bookTitle, bytes);
+            book = new Book(title, file.getBytes());
             books.add(book);
         } else {
             book = searchB;

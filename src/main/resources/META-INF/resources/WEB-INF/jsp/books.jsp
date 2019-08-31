@@ -125,8 +125,11 @@
 
 <form method="POST" action="books" enctype="multipart/form-data">
     <h2>Сохранить книгу</h2>
-    Автор: <input type="text" name="name"><br/>
-    Книга: <input type="file" name="file"><br/> <br/>
+    <%-- "&nbsp" - сделал для выравнивания вводимой информации по вертикали, ибо некрасиво иначе--%>
+    <%-- да, я понимаю, что это на грани говнокода, но я не верстальщик =) --%>
+    Автор:&nbsp&nbsp&nbsp&nbsp&nbsp <input type="text" name="name"><br/>
+    Название: <input type="text" name="title"><br/>
+    Книга:&nbsp&nbsp&nbsp&nbsp&nbsp <input type="file" name="file"><br/> <br/>
     <input type="submit" value="Сохранить">
 </form>
 </body>
