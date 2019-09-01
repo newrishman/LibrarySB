@@ -15,7 +15,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 @RunWith(SpringRunner.class)
 @DataJpaTest
-public class BookRepositoryTest {
+public class BookJpaRepoTest {
 
     @Autowired
     private TestEntityManager entityManager;

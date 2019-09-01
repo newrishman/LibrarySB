@@ -28,12 +28,19 @@ public class Book {
         return bytes;
     }
 
+
+
     public Book(String title, byte[] bytes) {
         this.title = title;
         this.bytes = bytes;
     }
 
     public Book() {
+    }
+
+    public Book(long id, String title) {
+        this.title = title;
+        this.id = id;
     }
 
     public Book(String title) {

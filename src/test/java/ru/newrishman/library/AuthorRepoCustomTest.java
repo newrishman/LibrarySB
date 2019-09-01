@@ -1,9 +1,7 @@
 package ru.newrishman.library;
 
 import org.junit.Before;
-import org.junit.BeforeClass;
 import org.junit.Test;
-import org.junit.jupiter.api.BeforeAll;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
@@ -11,7 +9,7 @@ import org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManager;
 import org.springframework.test.context.junit4.SpringRunner;
 import ru.newrishman.library.domain.Author;
 import ru.newrishman.library.domain.Book;
-import ru.newrishman.library.repository.BookRepository;
+import ru.newrishman.library.repository.AuthorRepository;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -20,12 +18,12 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 @RunWith(SpringRunner.class)
 @DataJpaTest
-public class BookRepositoryCustomTest {
+public class AuthorRepoCustomTest {
     @Autowired
     private TestEntityManager entityManager;
 
     @Autowired
-    private BookRepository repo;
+    private AuthorRepository repo;
 
     @Before
     public void createTables() {
@@ -43,19 +41,19 @@ public class BookRepositoryCustomTest {
     }
 
     @Test
-    public void findByAuthors_nameLikeIgnoreCaseTest() {
-        assertEquals(repo.findByAuthors_nameLikeIgnoreCase("name").size(), 1);
+    public void findByBooks_titleLikeIgnoreCaseTest() {
+        assertEquals(repo.findByBooks_titleLikeIgnoreCase("title").size(), 1);
     }
 
     @Test
-    public void findByTitleIgnoreCaseTest() {
-        String title = "title";
-        assertEquals(repo.findByTitleIgnoreCase(title).getTitle(), title);
+    public void findByNameIgnoreCaseTest() {
+        String name = "name";
+        assertEquals(repo.findByNameIgnoreCase(name).getName(), name);
     }
 
     @Test
-    public void deleteByIdBook() {
-        repo.deleteByIdBook(1L);
-        assertEquals(repo.findByAuthors_nameLikeIgnoreCase("name").size(), 0);
+    public void deleteByIdAuthorTest() {
+        repo.deleteByIdAuthor(1L);
+        assertEquals(repo.findByBooks_titleLikeIgnoreCase("title").size(), 0);
     }
 }
