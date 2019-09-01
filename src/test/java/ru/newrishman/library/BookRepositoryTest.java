@@ -37,7 +37,7 @@ public class BookRepositoryTest {
     }
 
     @Test
-    public void saveBookTest() {
+    public void addBookTest() {
         Book bookSave = new Book("book");
         assertEquals(repo.save(bookSave), bookSave);
     }
@@ -56,7 +56,7 @@ public class BookRepositoryTest {
     }
 
     @Test
-    public void findAllBooksTest() {
+    public void getAllBooksTest() {
         Book book = new Book("title1");
         Book book2 = new Book("title2");
         Book book3 = new Book("title3");
