@@ -69,7 +69,7 @@ public class BookRepositoryTest {
     }
 
     @Test
-    public void deleteBookTest() throws Exception {
+    public void deleteBookTest() {
         Book book = new Book("title");
         entityManager.persist(book);
         entityManager.flush();
