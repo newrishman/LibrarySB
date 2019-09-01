@@ -21,8 +21,12 @@ public class Book {
     private String title;
 
     @Lob
-    @Column(name="Book_File")
+    @Column(name = "Book_File")
     private byte[] bytes;
+
+    public byte[] getBytes() {
+        return bytes;
+    }
 
     public Book(String title, byte[] bytes) {
         this.title = title;
