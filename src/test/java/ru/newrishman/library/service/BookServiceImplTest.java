@@ -1,4 +1,4 @@
-package ru.newrishman.library;
+package ru.newrishman.library.service;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -11,8 +11,6 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.test.context.junit4.SpringRunner;
 import ru.newrishman.library.domain.Book;
 import ru.newrishman.library.repository.BookRepository;
-import ru.newrishman.library.service.BookService;
-import ru.newrishman.library.service.BookServiceImpl;
 
 import static org.mockito.internal.verification.VerificationModeFactory.times;
 

@@ -125,7 +125,7 @@
 </form:form>
 
 
-<form method="POST" action="books" enctype="multipart/form-data">
+<form method="POST" action="books/upload" enctype="multipart/form-data">
     <h2>Сохранить книгу</h2>
     <%-- "&nbsp" - сделал для выравнивания вводимой информации по вертикали, ибо некрасиво иначе--%>
     <%-- да, я понимаю, что это на грани говнокода, но я не верстальщик =) --%>

@@ -79,7 +79,7 @@ public class LibraryController {
         return "redirect:/books";
     }
 
-    @RequestMapping(value = "/books", method = RequestMethod.POST)
+    @RequestMapping(value = "/books/upload", method = RequestMethod.POST)
     public String saveBook(@RequestParam("name") String authorName,
                            @RequestParam("title") String title,
                            @RequestParam("file") MultipartFile file) throws IOException {

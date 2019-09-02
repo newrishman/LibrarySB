@@ -1,4 +1,4 @@
-package ru.newrishman.library;
+package ru.newrishman.library.repository;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -7,7 +7,6 @@ import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManager;
 import org.springframework.test.context.junit4.SpringRunner;
 import ru.newrishman.library.domain.Author;
-import ru.newrishman.library.repository.AuthorRepository;
 
 import static junit.framework.TestCase.assertTrue;
 import static org.junit.Assert.assertFalse;

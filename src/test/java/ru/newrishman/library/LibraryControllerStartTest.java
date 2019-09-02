@@ -17,7 +17,7 @@ public class LibraryControllerStartTest {
     private LibraryController controller;
 
     @Test
-    public void bookControllerSimpleTest() throws Exception {
+    public void libraryControllerSimpleTest() {
         assertThat(controller).isNotNull();
     }
 }

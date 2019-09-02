@@ -7,9 +7,9 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
-public class MainTest {
+public class LibraryMainTest {
 
     @Test
-    public void contextLoads() throws Exception {
+    public void contextLoads() {
     }
 }
